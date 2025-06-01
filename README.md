@@ -55,10 +55,10 @@ Ações aleatórias:
 
 ## 🛠️ Tecnologias Utilizadas
 
--Next.js (App Router)
--React (Hooks: useState, useEffect, useRef, useMemo)
--CSS Modules para estilização
--Vercel para deploy
+- Next.js (App Router)
+- React (Hooks: useState, useEffect, useRef, useMemo)
+- CSS Modules para estilização
+- Vercel para deploy
 
 ### Instalação
 
