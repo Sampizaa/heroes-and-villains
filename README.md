@@ -7,7 +7,7 @@ Jogo de turnos estilo RPG onde um herói e um vilão se enfrentam em batalha. De
 ## 🌐 Deploy
 
 O projeto está hospedado na Vercel:
-👉 Acesse o Jogo Online: https://heroes-and-villains-ten.vercel.app/
+- Acesse o Jogo Online 👉 https://heroes-and-villains-ten.vercel.app/
 
 ## ✨ Funcionalidades
 
