@@ -1,95 +1,99 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import Character from "@/app/components/Character";
+import gameManager from "@/app/hooks/gameManager";
+import { useMemo, useEffect, useRef } from "react";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    const {
+        hero,
+        villain,
+        handleHeroAction,
+        isHeroTurn,
+        history,
+        gameStatus,
+        resetGame
+    } = gameManager();
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    const historyContentRef = useRef(null);
+
+    // Função para rolar para o topo (já que novas mensagens ficam no topo)
+    const scrollToTop = () => {
+        if (historyContentRef.current) {
+            historyContentRef.current.scrollTop = 0;
+        }
+    };
+
+    useEffect(() => {
+        scrollToTop();
+    }, [history]);
+
+    const statusMessage = useMemo(() => {
+        switch(gameStatus) {
+            case 'won': return `${hero.name} venceu! 🏆`;
+            case 'lost': return `${villain.name} venceu! 💀`;
+            case 'fled': return `${hero.name} fugiu! 🏃`;
+            default: return isHeroTurn ? "Sua vez! ⏳" : "Vez do vilão...";
+        }
+    }, [gameStatus, isHeroTurn]);
+
+    return (
+        <div className="game-container">
+            <header className="game-header">
+                <h1>⚔️ Heroes and Villains 🦹</h1>
+                <div className="status-banner">
+                    <div className="status-message">{statusMessage}</div>
+                    <button onClick={resetGame} className="reset-btn">↻ Reiniciar</button>
+                </div>
+            </header>
+
+            <div className="battle-area">
+                <Character
+                    data={hero}
+                    isHero={true}
+                    onAction={handleHeroAction}
+                    isActive={isHeroTurn && gameStatus === 'playing'}
+                />
+
+                <div className="vs-container">
+                    <div className="vs">VS</div>
+                </div>
+
+                <Character
+                    data={villain}
+                    isHero={false}
+                    isActive={false}
+                />
+            </div>
+
+            <div className="history">
+                <div className="history-header">
+                    <h3>📜 Histórico de Batalha</h3>
+                    <div className="history-controls">
+                        <button
+                            className="history-btn"
+                            onClick={() => historyContentRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
+                        >
+                            ↑
+                        </button>
+                        <button
+                            className="history-btn"
+                            onClick={() => historyContentRef.current.scrollTo({ top: historyContentRef.current.scrollHeight, behavior: 'smooth' })}
+                        >
+                            ↓
+                        </button>
+                    </div>
+                </div>
+                <div
+                    className="history-content"
+                    ref={historyContentRef}
+                >
+                    <ul className="history-list">
+                        {history.map((entry, index) => (
+                            <li key={index} className="history-item">{entry}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }

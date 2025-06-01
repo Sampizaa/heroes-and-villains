@@ -1,42 +1,451 @@
+/* styles/globals.css */
+/* === VARIÁVEIS DE CORES === */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --hero-color: #4CAF50;
+  --villain-color: #F44336;
+  --action-color: #2196F3;
+  --reset-color: #ff5722;
+  --text-dark: #333;
+  --text-light: #fff;
+  --bg-light: #f0f0f0;
+  --bg-dark: #333;
+  --turn-indicator: #4CAF50;
+  --container-padding: 15px;
+  --history-width: 280px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* === ESTILOS GERAIS === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--bg-light);
+  padding: var(--container-padding);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.game-container {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  max-height: 800px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr var(--history-width);
+  grid-template-rows: auto 1fr;
+  gap: 15px;
+}
+
+/* === CABEÇALHO === */
+.game-header {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.game-header h1 {
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.status-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f8f8;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.status-message {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reset-btn {
+  background: var(--reset-color);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.reset-btn:hover {
+  background: #e64a19;
+  transform: scale(1.05);
+}
+
+/* === ÁREA DE BATALHA === */
+.battle-area {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding-right: 15px;
+}
+
+/* === PERSONAGENS === */
+.character {
+  width: 45%;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero {
+  border-top: 5px solid var(--hero-color);
+}
+
+.villain {
+  border-top: 5px solid var(--villain-color);
+}
+
+.character.active-turn {
+  box-shadow: 0 0 0 3px var(--action-color);
+}
+
+.character-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.character-image-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid;
+  flex-shrink: 0;
+}
+
+.hero .character-image-container {
+  border-color: var(--hero-color);
+}
+
+.villain .character-image-container {
+  border-color: var(--villain-color);
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.turn-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--turn-indicator);
+  color: white;
+  padding: 3px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.character h2 {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* BARRA DE VIDA */
+.life-container {
+  height: 25px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.life-bar {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.hero .life-bar {
+  background: var(--hero-color);
+}
+
+.villain .life-bar {
+  background: var(--villain-color);
+}
+
+.life-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* VS */
+.vs-container {
+  flex: 0 0 auto;
+}
+
+.vs {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: #333;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+/* AÇÕES */
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.action-btn {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: var(--action-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  min-height: 60px;
+}
+
+.action-btn:hover:not(:disabled) {
+  background: #0b7dda;
+  transform: translateY(-3px);
+}
+
+.action-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.action-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.action-icon {
+  font-size: 1.2rem;
+}
+
+/* HISTÓRICO (LATERAL) */
+.history {
+  grid-column: 2;
+  grid-row: 2;
+  background: var(--bg-dark);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.history h3 {
+  color: #ffcc00;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.history-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.history-btn {
+  background: #555;
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.history-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse; /* Novas mensagens no topo */
+}
+
+.history-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #444;
+  font-size: 0.85rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Barra de scroll personalizada */
+.history-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-content::-webkit-scrollbar-track {
+  background: #222;
+}
+
+.history-content::-webkit-scrollbar-thumb {
+  background: #ffcc00;
+  border-radius: 3px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+  .game-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .battle-area {
+    grid-column: 1;
+    grid-row: 2;
+    padding-right: 0;
+  }
+
+  .history {
+    grid-column: 1;
+    grid-row: 3;
+    height: 200px;
+  }
+
+  .history-content {
+    flex-direction: column;
   }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@media (max-width: 768px) {
+  .battle-area {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .character {
+    width: 100%;
+    height: auto;
+    max-height: 45%;
+  }
+
+  .vs-container {
+    margin: 5px 0;
+  }
+
+  .vs {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .status-banner {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .reset-btn {
+    width: 100%;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 10px;
+  }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+  .actions {
+    grid-template-columns: 1fr;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  .game-header h1 {
+    font-size: 1.5rem;
+  }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  .character {
+    padding: 10px;
+  }
+
+  .character-image-container {
+    width: 70px;
+    height: 70px;
   }
 }
