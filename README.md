@@ -4,6 +4,11 @@
 
 Jogo de turnos estilo RPG onde um herói e um vilão se enfrentam em batalha. Desenvolvido com **Next.js** e **React**, utilizando gerenciamento de estado puro (sem bibliotecas externas).
 
+## 🌐 Deploy
+
+O projeto está hospedado na Vercel:
+👉 Acesse o Jogo Online
+
 ## ✨ Funcionalidades
 
 ### 🦸‍♂️ Sistema de Batalha
@@ -46,7 +51,14 @@ Ações aleatórias:
 ### Pré-requisitos
 
 - Node.js (v18+)  
-- npm ou yarn  
+- npm ou yarn
+
+## 🛠️ Tecnologias Utilizadas
+
+-Next.js (App Router)
+-React (Hooks: useState, useEffect, useRef, useMemo)
+-CSS Modules para estilização
+-Vercel para deploy
 
 ### Instalação
 
