@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Heroes and Villains Battle Game 🏰⚔️🦹
+Vercel Deployment
 
-## Getting Started
+📖 Descrição
+Jogo de turnos estilo RPG onde um herói e um vilão se enfrentam em batalha. Desenvolvido com Next.js e React, com gerenciamento de estado puro (sem bibliotecas externas).
 
-First, run the development server:
+✨ Funcionalidades
+🦸‍♂️ Sistema de Batalha
+Turnos alternados entre herói e vilão
 
-```bash
+4 ações disponíveis para o herói:
+
+⚔️ Atacar (causa 10 de dano)
+
+🛡️ Defender (recupera 5 de vida)
+
+🧪 Poção (recupera 15 de vida)
+
+🏃 Fugir (70% de chance de sucesso)
+
+🤖 IA do Vilão
+Ações aleatórias:
+
+Ataque (8 de dano)
+
+Defesa (recupera 7 de vida)
+
+📊 Sistema de Vida
+Barra de vida visual (0-100%)
+
+Mecânica de dano/cura
+
+Condições de vitória/derrota
+
+📜 Histórico de Batalha
+Registro detalhado de todas as ações
+
+Scroll automático para novas mensagens
+
+Controles de navegação manual (↑/↓)
+
+🔄 Controles do Jogo
+Reinício completo da partida
+
+Feedback visual de turno ativo
+
+Mensagens de status do jogo
+
+🚀 Como Executar Localmente
+Pré-requisitos
+Node.js (v18+)
+
+npm ou yarn
+
+Instalação
+bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/heroes-villains-game.git
+
+# Acesse a pasta do projeto
+cd heroes-villains-game
+
+# Instale as dependências
+npm install
+
+# Execute o projeto
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O aplicativo estará disponível em: http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🛠️ Tecnologias Utilizadas
+Next.js (App Router)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+React (Hooks: useState, useEffect, useRef, useMemo)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+CSS Modules para estilização
 
-## Learn More
+Vercel para deploy
 
-To learn more about Next.js, take a look at the following resources:
+🌐 Deploy
+O projeto está hospedado na Vercel:
+👉 Acesse o Jogo Online
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📝 Licença
+Este projeto é open-source sob licença MIT. Sinta-se à vontade para usar como base para seus próprios projetos!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🎮 Como Jogar
+Escolha uma ação durante seu turno
 
-## Deploy on Vercel
+Observe a reação do vilão
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Gerencie sua vida estrategicamente
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Derrote o vilão ou fuja com sucesso!
+
+Divirta-se! 🎉
